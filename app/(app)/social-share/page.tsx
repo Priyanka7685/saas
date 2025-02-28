@@ -23,6 +23,7 @@ type SocialFormat = keyof typeof socialFormats;
   const [selectedFormat, setSelectedFormat] = useState<SocialFormat>("Instagram Square (1:1)");
   const [isUploading, setIsUploading] = useState(false);
   const [isTransforming, setIsTransforming] = useState(false);
+  const [processedImage, setProcessedImage] = useState<string | null>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ type SocialFormat = keyof typeof socialFormats;
       setIsUploading(false)
     }
   }
+
 
   // downloading images and videos
   const handleDownload = () => {
@@ -151,10 +153,12 @@ type SocialFormat = keyof typeof socialFormats;
             </div>
 
             <div className="card-actions justify-end mt-6">
-              <button className="btn btn-primary" onClick={handleDownload}>
+              <button className="btn btn-primary " onClick={handleDownload}>
                 Download for {selectedFormat}
               </button>
             </div>
+            {/* <div className="card-actions justify-end mt-6">
+            </div> */}
           </div>
         )}
       </div>

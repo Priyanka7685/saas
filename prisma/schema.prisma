@@ -18,8 +18,8 @@ model Video{
   title String
   description String?    // ? means optional
   publicId String
-  originalSize String
-  compressedSize String
+  originalSize Int
+  compressedSize Int
   duration Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

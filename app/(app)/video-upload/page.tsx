@@ -35,6 +35,7 @@ function VideoUpload() {
 
     try {
       const response = await axios.post("/api/video-upload", formData)
+      toast.success("Video uploaded successfully")
       // check for 200 response
     } catch (error) {
       console.log(error);

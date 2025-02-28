@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 import { auth } from '@clerk/nextjs/server';
-import { PrismaClient } from '@prisma/client/extension';
+import { PrismaClient } from '@prisma/client';
 
 // global initialization of prisma
-const prisma = new PrismaClient
+const prisma = new PrismaClient()
 
 // Configuration
 cloudinary.config({ 
@@ -24,7 +24,6 @@ interface CloudinaryUploadResult {
 export async function POST(request: NextRequest) {
 const { userId } = await auth() 
 
-
 try {
 
     if(!userId) {
@@ -41,7 +40,7 @@ try {
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
     const title = formData.get("title") as string;
-    const originalSize = formData.get("originalSize") as string;
+    const originalSize = Number(formData.get("originalSize")) ;
     const description = formData.get("description") as string;
 
     if(!file) {
@@ -78,9 +77,9 @@ try {
         data: {
             title,
             description,
-            public_id: result.public_id,
-            originalSize: originalSize,
-            compressedSize: String(result.bytes),
+            publicId: result.public_id,
+            originalSize: Number(originalSize),
+            compressedSize: result.bytes,
             duration: result.duration || 0
 
         }

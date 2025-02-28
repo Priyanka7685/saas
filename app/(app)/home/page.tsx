@@ -6,10 +6,11 @@ import { Video } from '@/types'
 import toast from 'react-hot-toast'
 
 function Home() {
+  
   const [videos, setVideos] = useState<Video[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
+  
   const fetchVideos = useCallback(async () => {
     try {
       const response = await axios.get('/api/videos')
@@ -20,7 +21,7 @@ function Home() {
       }
     } catch (error) {
       console.log(error);
-      setError("Failed to fetch videos")
+      toast.error("Failed to fetch videos")
       
     } finally {
       setLoading(false)
@@ -31,7 +32,7 @@ function Home() {
     fetchVideos()
   }, [fetchVideos])
 
-  const handleDownload = useCallback((url: string, title: string) => { () => {
+  const handleDownload = useCallback((url: string, title: string) => { 
     const link = document.createElement("a");
     link.href = url;
     link.setAttribute("download", `${title}.mp4`);
@@ -39,7 +40,7 @@ function Home() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }
+  
 },[])
 
   if(loading) {
