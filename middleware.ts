@@ -7,12 +7,12 @@ const isPublicRoute = createRouteMatcher([
     "/sign-in",
     "/sign-up",
     "/",
-    "/home"
+    // "/home"
 ])
 
-const isPublicApiRoute = createRouteMatcher([
-    "/api/videos"
-])
+// const isPublicApiRoute = createRouteMatcher([
+//     "/api/videos"
+// ])
 
 export default clerkMiddleware(async(auth, req) => {
     // we'll get these info if someone accessing the page
